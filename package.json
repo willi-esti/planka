@@ -60,7 +60,8 @@
     "concurrently": "^8.2.2",
     "genversion": "^3.2.0",
     "husky": "^9.1.7",
-    "lint-staged": "^15.2.10"
+    "lint-staged": "^15.2.10",
+    "sass": "^1.83.1"
   },
   "devDependencies": {
     "eslint": "^8.57.1",
