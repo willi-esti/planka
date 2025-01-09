@@ -506,6 +506,14 @@ const CardModal = React.memo(
                   className={styles.actionButton}
                   onClick={handleToggleSubscriptionClick}
                 >
+                  <Icon name="mail outline" className={styles.actionIcon} />
+                  <span>Mail</span>
+                </Button>
+                <Button
+                  fluid
+                  className={styles.actionButton}
+                  onClick={handleToggleSubscriptionClick}
+                >
                   <Icon name="paper plane outline" className={styles.actionIcon} />
                   {isSubscribed ? t('action.unsubscribe') : t('action.subscribe')}
                 </Button>
