@@ -149,6 +149,42 @@ const CardModal = React.memo(
       });
     }, [isSubscribed, onUpdate]);
 
+    const handleMailClick = useCallback(() => {
+      /* console.log(userIds);
+      async function getProjectIDs() {
+        try {
+          const res = await axios.get(`${config.baseUrl}api/projects`, {
+            headers: {
+              Authorization: `Bearer ${await getXauthToken()}`,
+            },
+          });
+          return res.data.items.map((project) => project.id);
+        } catch (error) {
+          return `Error requesting projectIDs: ${error.message}`;
+        }
+      }
+      ids = getProjectIDs(); */
+      const accessToken = document.cookie
+        .split('; ')
+        .find((row) => row.startsWith('accessToken='))
+        ?.split('=')[1];
+      console.log(accessToken);
+      // fetch api
+      fetch('http://localhost:1337/api/config', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`,
+          'sec-fetch-site': 'same-site',
+        },
+        body: JSON.stringify({
+          to: 'test@test.fr',
+          subject: 'Test Email',
+          html: '<p>This is a test email.</p>',
+        }),
+      });
+    }, []);
+
     const handleDuplicateClick = useCallback(() => {
       onDuplicate();
       onClose();
@@ -501,11 +537,7 @@ const CardModal = React.memo(
               </div>
               <div className={styles.actions}>
                 <span className={styles.actionsTitle}>{t('common.actions')}</span>
-                <Button
-                  fluid
-                  className={styles.actionButton}
-                  onClick={handleToggleSubscriptionClick}
-                >
+                <Button fluid className={styles.actionButton} onClick={handleMailClick}>
                   <Icon name="mail outline" className={styles.actionIcon} />
                   <span>Mail</span>
                 </Button>
