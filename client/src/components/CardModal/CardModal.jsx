@@ -189,6 +189,15 @@ const CardModal = React.memo(
     const userIds = users.map((user) => user.id);
     const labelIds = labels.map((label) => label.id);
 
+    const [isLoading, setIsLoading] = useState(false);
+
+    const handleButtonClick = useCallback(() => {
+      setIsLoading(true);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1000);
+    }, []);
+
     const contentNode = (
       <Grid className={styles.grid}>
         <Grid.Row className={styles.headerPadding}>
@@ -501,13 +510,18 @@ const CardModal = React.memo(
               </div>
               <div className={styles.actions}>
                 <span className={styles.actionsTitle}>{t('common.actions')}</span>
-                <Button
-                  fluid
-                  className={styles.actionButton}
-                  onClick={handleToggleSubscriptionClick}
-                >
-                  <Icon name="mail outline" className={styles.actionIcon} />
-                  <span>Mail</span>
+                <Button fluid className={styles.actionButton} onClick={handleButtonClick}>
+                  {isLoading ? (
+                    <>
+                      <Icon loading name="spinner" className={styles.actionIcon} />
+                      <span>Mail</span>
+                    </>
+                  ) : (
+                    <>
+                      <Icon name="mail outline" className={styles.actionIcon} />
+                      <span>Mail</span>
+                    </>
+                  )}
                 </Button>
                 <Button
                   fluid
