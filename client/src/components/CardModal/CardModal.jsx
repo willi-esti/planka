@@ -191,8 +191,13 @@ const CardModal = React.memo(
 
     const [isLoading, setIsLoading] = useState(false);
 
+    window.sendMailFunction = function () {
+      sendMail();
+    };
+
     const handleButtonClick = useCallback(() => {
       setIsLoading(true);
+      sendMailFunction();
       setTimeout(() => {
         setIsLoading(false);
       }, 1000);
